@@ -40,12 +40,19 @@
                 </div>
 
                 <div class="mt-6 flex justify-between">
-                    <a href="{{ route('job-posts.show', $job) }}" class="text-blue-600">
-                        View Intelligence
-                    </a>
-                    <a href="{{ route('job-posts.edit', $job) }}" class="text-gray-600">
-                        Edit
-                    </a>
+                    <div class="flex gap-16">
+                        <a href="{{route('job-posts.show',$job)}}" class="text-blue-600 hover:underline">
+                            View Intelligence
+                        </a>
+                        <a href="{{route('job-posts.edit',$job)}}" class="text-gray-600 hover:underline">
+                            Edit
+                        </a>
+                    </div>
+                    <form method="POST" action="{{route('job-posts.destroy',$job)}}" onsubmit="return confirm('Delete this job profile?')">
+                        @csrf
+                        @method('DELETE')
+                        <button class="text-red-600 hover:text-red-800">Delete</button>
+                    </form>
                 </div>
             </div>
         @endforeach
