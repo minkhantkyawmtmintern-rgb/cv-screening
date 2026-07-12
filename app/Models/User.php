@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'role'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -30,8 +30,37 @@ class User extends Authenticatable
         ];
     }
 
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isRecruiter()
+    {
+        return $this->role === 'recruiter';
+    }
+
+    public function isCandidate()
+    {
+        return $this->role === 'candidate';
+    }
+
     public function jobPosts()
     {
         return $this->hasMany(JobPost::class, 'created_by');
+    }
+
+    public function candidateProfile()
+    {
+        return $this->hasOne(
+            CandidateProfile::class
+        );
+    }
+
+    public function resumes()
+    {
+        return $this->hasMany(
+            Resume::class
+        );
     }
 }
