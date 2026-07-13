@@ -34,4 +34,9 @@ class JobPost extends Model
             ->withPivot('importance')
             ->withTimestamps();
     }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
+    }
 }

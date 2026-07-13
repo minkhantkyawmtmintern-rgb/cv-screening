@@ -33,7 +33,7 @@
             </nav>
         </aside>
 
-        @if(session('success'))
+        {{-- @if(session('success'))
         <div class="mb-6 bg-green-100 text-green-700 px-5 py-3 rounded-xl">
             {{ session('success') }}
         </div>
@@ -44,7 +44,7 @@
             {{ session('error') }}
         </div>
         @endif
-        
+         --}}
         <main class="flex-1 p-8">
             @yield('content')
         </main>

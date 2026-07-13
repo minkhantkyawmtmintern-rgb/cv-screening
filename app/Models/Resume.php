@@ -16,11 +16,16 @@ class Resume extends Model
     ];
 
     protected $casts = [
-        'ai_analysis'=>'array'
+        'ai_analysis' => 'array'
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class);   
+        return $this->belongsTo(User::class);
+    }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
     }
 }

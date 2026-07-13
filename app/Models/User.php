@@ -63,4 +63,9 @@ class User extends Authenticatable
             Resume::class
         );
     }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class,'candidate_id');
+    }
 }

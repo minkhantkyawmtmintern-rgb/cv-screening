@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Resume;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ResumeService
 {
@@ -39,6 +40,13 @@ class ResumeService
 
     public function delete(Resume $resume)
     {
-        return $resume->delete();
+        return DB::transaction(function() use($resume){
+            if(Storage::disk('public')
+                ->exists($resume->file_path))
+            {
+                Storage::disk('public')->delete($resume->file_path);
+            }
+            return $resume->delete();
+        });
     }
 }
