@@ -20,7 +20,8 @@
                 @endforeach
             </div>
 
-            <a href="#" class="inline-block mt-10 bg-green-600 text-white px-6 py-3 rounded-xl">
+            <a href="{{ route('candidate.jobs.apply.create', $jobPost) }}"
+                class="inline-block mt-10 bg-green-600 text-white px-6 py-3 rounded-xl">
                 Apply Now
             </a>
         </div>

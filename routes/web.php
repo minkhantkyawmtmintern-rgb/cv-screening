@@ -5,6 +5,7 @@ use App\Http\Controllers\Candidate\ProfileController;
 use App\Http\Controllers\Candidate\ResumeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Recruiter\JobPostController;
+use App\Http\Controllers\Candidate\ApplicationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard',[DashboardController::class,'index'])->middleware('auth')->name('dashboard');
@@ -16,9 +17,7 @@ Route::middleware([
     ->prefix('candidate')
     ->group(function () {
 
-        Route::get('/dashboard',function(){
-            return view('candidate.dashboard');
-        })->name('candidate.dashboard');
+        Route::get('/dashboard',[DashboardController::class,'index'])->name('candidate.dashboard');
 
         Route::get('/profile',[ProfileController::class,'show'])->name('candidate.profile.show');
         Route::get('/profile/create',[ProfileController::class,'create'])->name('candidate.profile.create');
@@ -33,6 +32,10 @@ Route::middleware([
 
         Route::get('/jobs',[JobController::class,'index'])->name('candidate.jobs.index');
         Route::get('/jobs/{jobPost}',[JobController::class,'show'])->name('candidate.jobs.show');
+        Route::get('/jobs/{jobPost}/apply',[ApplicationController::class,'create'])->name('candidate.jobs.apply.create');
+        Route::post('/jobs/{jobPost}/apply',[ApplicationController::class,'store'])->name('candidate.jobs.apply');
+
+        Route::get('/applications',[ApplicationController::class,'index'])->name('candidate.applications.index');
 
     });
 
