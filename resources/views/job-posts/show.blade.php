@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.recruiter')
 @section('title', 'Job Intelligence')
 @section('content')
 
@@ -13,9 +13,9 @@
                         {{ $jobPost->department }}
                     </p>
                 </div>
-                
+
                 <div class="flex items-center gap-3">
-                    <a href="{{ route('job-posts.edit',$jobPost) }}" 
+                    <a href="{{ route('job-posts.edit', $jobPost) }}"
                         class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl">
                         Edit Profile
                     </a>

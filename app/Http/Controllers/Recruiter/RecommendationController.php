@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Http\Controllers\Recruiter;
+
+use App\Http\Controllers\Controller;
+use App\Models\JobPost;
+use App\Services\Recruiter\RecommendationService;
+use Illuminate\Http\Request;
+
+class RecommendationController extends Controller
+{
+    public function __construct(private RecommendationService $service)
+    { }
+
+    public function index(JobPost $jobPost)
+    {
+        $candidates = $this->service->getRecommendedCandidates($jobPost->id);
+        return view(
+            'recruiter.recommendations.index',
+            compact('jobPost','candidates')
+        );
+    }
+}

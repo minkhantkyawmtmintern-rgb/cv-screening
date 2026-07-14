@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.recruiter')
 
 @section('title', 'Job Posts')
 @section('content')
