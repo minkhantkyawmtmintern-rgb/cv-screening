@@ -4,11 +4,12 @@ use App\Http\Controllers\Candidate\JobController;
 use App\Http\Controllers\Candidate\ProfileController;
 use App\Http\Controllers\Candidate\ResumeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Candidate\CandidateDashboardController;
 use App\Http\Controllers\Recruiter\JobPostController;
 use App\Http\Controllers\Candidate\ApplicationController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/dashboard',[DashboardController::class,'index'])->middleware('auth')->name('dashboard');
+Route::get('/dashboard',[DashboardController::class,'index'])->middleware(['auth'])->name('dashboard');
 
 Route::middleware([
     'auth',
@@ -17,7 +18,7 @@ Route::middleware([
     ->prefix('candidate')
     ->group(function () {
 
-        Route::get('/dashboard',[DashboardController::class,'index'])->name('candidate.dashboard');
+        Route::get('/dashboard',[CandidateDashboardController::class,'index'])->name('candidate.dashboard');
 
         Route::get('/profile',[ProfileController::class,'show'])->name('candidate.profile.show');
         Route::get('/profile/create',[ProfileController::class,'create'])->name('candidate.profile.create');

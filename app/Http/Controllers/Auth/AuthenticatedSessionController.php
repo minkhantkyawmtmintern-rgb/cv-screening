@@ -28,7 +28,24 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $user = auth()->user();
+
+        if($user->role === 'candidate')
+        {
+            return redirect()->route('candidate.dashboard');
+        }
+
+        if($user->role === 'recruiter')
+        {
+            return redirect()->route('recruiter.dashboard');
+        }
+
+        if($user === 'admin')
+        {
+            return redirect()->route('admin.dashboard');
+        }
+
+        return redirect('/')->with('error','Invalid role');
     }
 
     /**
