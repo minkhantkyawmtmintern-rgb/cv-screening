@@ -33,13 +33,13 @@
                     Job Posts
                 </a>
 
-                <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
+                <a href="{{ route('recruiter.applications.index') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
                     Applications
                 </a>
 
-                <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
+                {{-- <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
                     AI Recommendations
-                </a>
+                </a> --}}
 
                 <form method="POST" action="{{ route('logout') }}">
 

@@ -14,6 +14,7 @@ class ApplicationController extends Controller
 
     public function index()
     {
+        $applications = $this->service->getApplications();
         return view('recruiter.applications.index',compact('applications'));
     }
 

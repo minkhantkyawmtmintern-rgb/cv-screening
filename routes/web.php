@@ -56,6 +56,12 @@ Route::middleware([
 
         Route::get('/job-posts/{jobPost}/recommendations', [RecommendationController::class, 'index'])
             ->name('recruiter.recommendations.index');
+
+        Route::post('/job-posts/{jobPost}/recommendations/generate',[RecommendationController::class,'generate'])
+            ->name('recruiter.recommendations.generate');
+
+        Route::get('/applications/{application}/resume',[\App\Http\Controllers\Recruiter\ResumeController::class,'view'])
+            ->name('recruiter.applications.resume');
     });
 
 Route::middleware([

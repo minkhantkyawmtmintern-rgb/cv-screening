@@ -20,4 +20,9 @@ class RecommendationController extends Controller
             compact('jobPost','candidates')
         );
     }
+
+    public function generate(JobPost $jobPost)
+    {
+        $this->service->generateRecommendation($jobPost);
+    }
 }
