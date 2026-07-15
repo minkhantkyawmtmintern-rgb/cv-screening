@@ -4,10 +4,15 @@ namespace App\Services\Recruiter;
 
 use App\Models\Application;
 use App\Models\JobPost;
-
+use App\Services\AI\AIService;
 class RecommendationService
 {
-    public function getRecommendedCandidates($jobPostId)
+    public function __construct(private AIService $ai)
+    {
+        //
+    }
+
+    public function getRecommendedCandidates(int $jobPostId)
     {
         return Application::with([
             'candidate.candidateProfile','resume'
@@ -23,14 +28,14 @@ class RecommendationService
         )->get();
 
         foreach($applications as $application){
-            $application->update([
-                'match_score'=>rand(60,95),
-                'ai_feedback'=>[
-                    'summary'=>'Candidate skills match the job requirements.',
-                    'strengths'=>['PHP','Laravel'],
-                    'missing'=>['Docker']
-                ]
-            ]);
+           $data = $this->getAIData($application);
+
+           $result = $this->ai->analyze($data);
+
+           $application->update([
+            'match_score'=>$result['score'],
+            'ai_feedback'=>$result['feedback'],
+           ]);
         }
     }
 

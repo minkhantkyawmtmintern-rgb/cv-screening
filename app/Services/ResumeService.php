@@ -6,9 +6,17 @@ use App\Models\Resume;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Smalot\PdfParser\Parser;
 
 class ResumeService
 {
+    private Parser $parser;
+
+    public function __construct()
+    {
+        $this->parser = new Parser();
+    }
+
     public function upload(
         UploadedFile $file,
         int $userId
@@ -18,6 +26,12 @@ class ResumeService
                 'resumes',
                 'public'
             );
+            $extractedText = null;
+            if ($file->extension() === 'pdf') {
+                $pdf = $this->parser
+                    ->parseFile(storage_path('app/public/' . $path));
+                $extractedText = $pdf->getText();
+            }
 
             return Resume::create([
 
@@ -29,6 +43,7 @@ class ResumeService
 
                 'file_type' => $file->extension(),
 
+                'extracted_text' => $extractedText,
             ]);
         });
     }
@@ -40,10 +55,10 @@ class ResumeService
 
     public function delete(Resume $resume)
     {
-        return DB::transaction(function() use($resume){
-            if(Storage::disk('public')
-                ->exists($resume->file_path))
-            {
+        return DB::transaction(function () use ($resume) {
+            if (Storage::disk('public')
+                ->exists($resume->file_path)
+            ) {
                 Storage::disk('public')->delete($resume->file_path);
             }
             return $resume->delete();
