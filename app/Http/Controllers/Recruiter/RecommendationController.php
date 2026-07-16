@@ -24,5 +24,8 @@ class RecommendationController extends Controller
     public function generate(JobPost $jobPost)
     {
         $this->service->generateRecommendation($jobPost);
+        return redirect()
+            ->route('recruiter.recommendations.index',$jobPost)
+            ->with('success','AI Recommendation Generated.');
     }
 }

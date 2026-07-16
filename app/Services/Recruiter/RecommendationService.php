@@ -50,8 +50,8 @@ class RecommendationService
             'application_id'=>$application->id,
             'job'=>[
                 'title'=>$application->jobPost->title,
-                'description'=>$application->jobPost->description,
-                'skills'=>$application->jobPost->skills->pluck('name')->toArray(),
+                'description'=>$application->jobPost->description ?? '',
+                'required_skills'=>$application->jobPost->skills->pluck('name')->toArray(),
             ],
             'candidate'=>[
                 'name'=>$application->candidate->name,
@@ -59,7 +59,8 @@ class RecommendationService
                     'education'=>$application->candidate->candidateProfile->education ?? null,
                     'experience'=>$application->candidate->candidateProfile->experience_years ?? 0,
                 ],
-            'resume_text'=>$application->resume->extracted_text ?? null,
+                'resume_text'=>$application->resume->extracted_text ?? '',
+                'skills'=>[]
             ],
         ];
     }

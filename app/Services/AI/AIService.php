@@ -9,12 +9,12 @@ class AIService
    
     public function analyze(array $data)
     {
-        $response = Http::post(
+        $response = Http::timeout(60)->post(
             config('services.ai.url').'/analyze',$data
         );
         if($response->failed())
         {
-            throw new \Exception('AI service failed.');
+            throw new \Exception('AI service connection failed.');
         }
         return $response->json();
     }
