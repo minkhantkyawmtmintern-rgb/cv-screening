@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('job_post_id')->constrained()->cascadeOnDelete();
             $table->foreignId('candidate_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('resume_id')->constrained()->cascadeOnDelete();
-            $table->integer('match_score')->nullable();
+            $table->decimal('match_score',5,2)->nullable();
             $table->jsonb('ai_feedback')->nullable();
             $table->text('cover_letter')->nullable();
 
