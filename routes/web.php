@@ -53,6 +53,9 @@ Route::middleware([
             ->name('recruiter.applications.index');
         Route::get('/applications/{application}', [\App\Http\Controllers\Recruiter\ApplicationController::class, 'show'])
             ->name('recruiter.applications.show');
+        
+        Route::get('/applications/{application}/ai-report',[RecommendationController::class,'show'])
+            ->name('recruiter.recommendations.show');
 
         Route::get('/job-posts/{jobPost}/recommendations', [RecommendationController::class, 'index'])
             ->name('recruiter.recommendations.index');
