@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Candidate\JobController;
 use App\Http\Controllers\Candidate\ProfileController;
 use App\Http\Controllers\Candidate\ResumeController;
@@ -48,23 +49,25 @@ Route::middleware([
 ])
     ->prefix('recruiter')
     ->group(function () {
-        Route::get('/dashboard',[RecruiterDashboardController::class,'index'])->name('recruiter.dashboard');
+        Route::get('/dashboard', [RecruiterDashboardController::class, 'index'])->name('recruiter.dashboard');
         Route::get('/applications', [\App\Http\Controllers\Recruiter\ApplicationController::class, 'index'])
             ->name('recruiter.applications.index');
         Route::get('/applications/{application}', [\App\Http\Controllers\Recruiter\ApplicationController::class, 'show'])
             ->name('recruiter.applications.show');
-        
-        Route::get('/applications/{application}/ai-report',[RecommendationController::class,'show'])
+
+        Route::get('/applications/{application}/ai-report', [RecommendationController::class, 'show'])
             ->name('recruiter.recommendations.show');
 
         Route::get('/job-posts/{jobPost}/recommendations', [RecommendationController::class, 'index'])
             ->name('recruiter.recommendations.index');
 
-        Route::post('/job-posts/{jobPost}/recommendations/generate',[RecommendationController::class,'generate'])
+        Route::post('/job-posts/{jobPost}/recommendations/generate', [RecommendationController::class, 'generate'])
             ->name('recruiter.recommendations.generate');
 
-        Route::get('/applications/{application}/resume',[\App\Http\Controllers\Recruiter\ResumeController::class,'view'])
+        Route::get('/applications/{application}/resume', [\App\Http\Controllers\Recruiter\ResumeController::class, 'view'])
             ->name('recruiter.applications.resume');
+
+        Route::resource('job-posts', JobPostController::class);
     });
 
 Route::middleware([
@@ -73,8 +76,12 @@ Route::middleware([
 ])->prefix('admin')
     ->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+
+       Route::get('/users',[UserController::class,'index'])->name('users.index');
+       Route::patch('/users/{user}/toggle',[UserController::class,'toggleStatus'])->name('users.toggle');
+       Route::delete('/users/{user}',[UserController::class,'destroy'])->name('users.destroy');
     });
 
-Route::resource('job-posts', JobPostController::class);
+
 
 require __DIR__ . '/auth.php';
