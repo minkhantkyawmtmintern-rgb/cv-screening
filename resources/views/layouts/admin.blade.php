@@ -36,7 +36,7 @@
 
                 <a href="{{ route('admin.dashboard') }}" class="block px-4 py-3 rounded-lg hover:bg-gray-700">
 
-                   🏠 Dashboard
+                    🏠 Dashboard
 
                 </a>
 
@@ -56,15 +56,19 @@
                     👥 Users
                 </a>
 
+                <a href="{{ route('admin.skills.index') }}" class="block px-4 py-3 rounded-lg hover:bg-gray-700">
+                    🛠 Skills
+                </a>
+
                 <a href="{{ route('admin.jobs.index') }}" class="block px-4 py-3 rounded-lg hover:bg-gray-700">
 
                     💼 Jobs
 
                 </a>
 
-                <a href="#" class="block px-4 py-3 rounded-lg hover:bg-gray-700">
+                <a href="{{ route('admin.applications.index') }}" class="block px-4 py-3 rounded-lg hover:bg-gray-700">
 
-                   📄 Applications
+                    📄 Applications
 
                 </a>
 
@@ -76,7 +80,7 @@
 
                 <a href="{{ route('admin.analytics.index') }}" class="block px-4 py-3 rounded-lg hover:bg-gray-700">
 
-                   📊 AI Analytics
+                    📊 AI Analytics
 
                 </a>
                 <form method="POST" action="{{ route('logout') }}">

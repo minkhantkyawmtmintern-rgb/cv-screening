@@ -27,14 +27,14 @@
             <nav class="space-y-3">
 
                 <a href="{{ route('recruiter.dashboard') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
-                    Dashboard
+                   🏠 Dashboard
                 </a>
                 <a href="{{ route('job-posts.index') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
-                    Job Posts
+                    💼 Job Posts
                 </a>
 
                 <a href="{{ route('recruiter.applications.index') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
-                    Applications
+                    📄 Applications
                 </a>
 
                 {{-- <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-700">

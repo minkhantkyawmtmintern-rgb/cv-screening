@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AnalyticsController;
+use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Candidate\JobController;
 use App\Http\Controllers\Candidate\ProfileController;
@@ -88,6 +89,11 @@ Route::middleware([
        Route::get('/jobs',[App\Http\Controllers\Admin\JobController::class,'index'])->name('jobs.index');
        Route::get('/jobs/{jobPost}',[App\Http\Controllers\Admin\JobController::class,'show'])->name('jobs.show');
        Route::delete('/jobs/{jobPost}',[App\Http\Controllers\Admin\JobController::class,'destroy'])->name('jobs.destroy');
+
+       Route::get('/applications',[App\Http\Controllers\Admin\ApplicationController::class,'index'])->name('applications.index');
+       Route::get('/applications/{application}',[App\Http\Controllers\Admin\ApplicationController::class,'show'])->name('applications.show');
+
+       Route::resource('skills',SkillController::class);
     });
 
 
