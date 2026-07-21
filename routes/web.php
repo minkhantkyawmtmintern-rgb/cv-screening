@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Candidate\JobController;
 use App\Http\Controllers\Candidate\ProfileController;
@@ -74,12 +75,19 @@ Route::middleware([
     'auth',
     'role:admin'
 ])->prefix('admin')
+    ->name('admin.')
     ->group(function () {
-        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
        Route::get('/users',[UserController::class,'index'])->name('users.index');
        Route::patch('/users/{user}/toggle',[UserController::class,'toggleStatus'])->name('users.toggle');
        Route::delete('/users/{user}',[UserController::class,'destroy'])->name('users.destroy');
+
+       Route::get('/analytics',[AnalyticsController::class,'index'])->name('analytics.index');
+
+       Route::get('/jobs',[App\Http\Controllers\Admin\JobController::class,'index'])->name('jobs.index');
+       Route::get('/jobs/{jobPost}',[App\Http\Controllers\Admin\JobController::class,'show'])->name('jobs.show');
+       Route::delete('/jobs/{jobPost}',[App\Http\Controllers\Admin\JobController::class,'destroy'])->name('jobs.destroy');
     });
 
 

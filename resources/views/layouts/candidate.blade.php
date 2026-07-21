@@ -34,6 +34,17 @@
                 <a href="{{ route('candidate.profile.show') }}" class="block px-4 py-3 rounded-lg hover:bg-slate-700">
                     👤 Profile
                 </a>
+                <form method="POST" action="{{ route('logout') }}">
+
+                    @csrf
+
+                    <button class="w-full text-left px-4 py-3 rounded-lg hover:bg-red-600">
+
+                        Logout
+
+                    </button>
+
+                </form>
             </nav>
         </aside>
 

@@ -12,7 +12,7 @@ class UserService
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('name', 'ILIKE', "%{$search}%")
-                      ->orWhere('email', 'ILIKE', "%{$search}%");
+                        ->orWhere('email', 'ILIKE', "%{$search}%");
                 });
             })
             ->when($role, function ($query) use ($role) {
@@ -33,5 +33,27 @@ class UserService
     public function delete(User $user)
     {
         $user->delete();
+    }
+
+    public function getStatistics()
+    {
+        return [
+            'total' => User::count(),
+
+            'admins' => User::where(
+                'role',
+                'admin'
+            )->count(),
+
+            'recruiters' => User::where(
+                'role',
+                'recruiter'
+            )->count(),
+
+            'candidates' => User::where(
+                'role',
+                'candidate'
+            )->count(),
+        ];
     }
 }

@@ -17,7 +17,8 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $users = $this->service->getUsers($request->search,$request->role);
-        return view('admin.users.index',compact('users'));
+        $stats = $this->service->getStatistics();
+        return view('admin.users.index',compact('users','stats'));
     }
 
     public function toggleStatus(User $user)

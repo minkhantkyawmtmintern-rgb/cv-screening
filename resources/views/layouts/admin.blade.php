@@ -5,10 +5,9 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   <title>
+    <title>
         @yield('title') - AI Recruitment
     </title>
 
@@ -18,84 +17,91 @@
 
 <body class="bg-gray-100">
 
-<div class="flex">
+    <div class="flex">
 
-    {{-- Sidebar --}}
-    <aside class="w-64 min-h-screen bg-slate-900 text-white">
+        {{-- Sidebar --}}
+        <aside class="w-64 min-h-screen bg-slate-900 text-white">
 
-        <div class="p-6">
+            <div class="p-6">
 
-            <h2 class="text-2xl font-bold">
+                <h2 class="text-2xl font-bold">
 
-                AI Recruitment
+                    AI Recruitment
 
-            </h2>
+                </h2>
 
-        </div>
+            </div>
 
-        <nav class="space-y-2 px-4">
+            <nav class="space-y-2 px-4">
 
-            <a href="{{ route('admin.dashboard') }}"
-               class="block px-4 py-3 rounded-lg hover:bg-gray-700">
+                <a href="{{ route('admin.dashboard') }}" class="block px-4 py-3 rounded-lg hover:bg-gray-700">
 
-                Dashboard
+                   🏠 Dashboard
 
-            </a>
+                </a>
 
-            <a href="#"
-               class="block px-4 py-3 rounded-lg hover:bg-gray-700">
+                {{-- <a href="#" class="block px-4 py-3 rounded-lg hover:bg-gray-700">
 
-                Recruiters
+                    Recruiters
 
-            </a>
+                </a>
 
-            <a href="#"
-               class="block px-4 py-3 rounded-lg hover:bg-gray-700">
+                <a href="#" class="block px-4 py-3 rounded-lg hover:bg-gray-700">
 
-                Candidates
+                    Candidates
 
-            </a>
+                </a> --}}
 
-            <a href="#"
-               class="block px-4 py-3 rounded-lg hover:bg-gray-700">
+                <a href="{{ route('admin.users.index') }}" class="block px-4 py-3 rounded-lg hover:bg-gray-700">
+                    👥 Users
+                </a>
 
-                Jobs
+                <a href="{{ route('admin.jobs.index') }}" class="block px-4 py-3 rounded-lg hover:bg-gray-700">
 
-            </a>
+                    💼 Jobs
 
-            <a href="#"
-               class="block px-4 py-3 rounded-lg hover:bg-gray-700">
+                </a>
 
-                Applications
+                <a href="#" class="block px-4 py-3 rounded-lg hover:bg-gray-700">
 
-            </a>
+                   📄 Applications
 
-            <a href="#"
-               class="block px-4 py-3 rounded-lg hover:bg-gray-700">
+                </a>
 
-                AI Reports
+                {{-- <a href="#" class="block px-4 py-3 rounded-lg hover:bg-gray-700">
 
-            </a>
+                    AI Reports
 
-            <a href="#"
-               class="block px-4 py-3 rounded-lg hover:bg-gray-700">
+                </a> --}}
 
-                Analytics
+                <a href="{{ route('admin.analytics.index') }}" class="block px-4 py-3 rounded-lg hover:bg-gray-700">
 
-            </a>
+                   📊 AI Analytics
 
-        </nav>
+                </a>
+                <form method="POST" action="{{ route('logout') }}">
 
-    </aside>
+                    @csrf
 
-    {{-- Content --}}
-    <main class="flex-1 p-8">
+                    <button class="w-full text-left px-4 py-3 rounded-lg hover:bg-red-600">
 
-        @yield('content')
+                        Logout
 
-    </main>
+                    </button>
 
-</div>
+                </form>
+            </nav>
+
+        </aside>
+
+        {{-- Content --}}
+        <main class="flex-1 p-8">
+
+            @yield('content')
+
+        </main>
+
+    </div>
 
 </body>
 
