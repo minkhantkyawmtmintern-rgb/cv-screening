@@ -12,12 +12,21 @@ class SkillController extends Controller
 {
     public function __construct(private SkillService $service) {}
 
-    public function index()
+    public function index(Request $request)
     {
-        $skills = $this->service->all();
-        return view('admin.skills.index', compact('skills'));
-    }
+        $skills = $this->service->all(
+            $request->search,
+            $request->category,
+            $request->get('sort', 'name'),
+            $request->get('direction', 'asc')
+        );
 
+        return view(
+            'admin.skills.index',
+            compact('skills')
+        );
+    }
+    
     public function create()
     {
         return view('admin.skills.create');

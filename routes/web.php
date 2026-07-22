@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AnalyticsController;
+use App\Http\Controllers\Admin\RecruiterController;
 use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Candidate\JobController;
@@ -92,7 +93,8 @@ Route::middleware([
 
        Route::get('/applications',[App\Http\Controllers\Admin\ApplicationController::class,'index'])->name('applications.index');
        Route::get('/applications/{application}',[App\Http\Controllers\Admin\ApplicationController::class,'show'])->name('applications.show');
-
+       
+       Route::resource('recruiters', RecruiterController::class);
        Route::resource('skills',SkillController::class);
     });
 

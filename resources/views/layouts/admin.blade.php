@@ -40,11 +40,7 @@
 
                 </a>
 
-                {{-- <a href="#" class="block px-4 py-3 rounded-lg hover:bg-gray-700">
-
-                    Recruiters
-
-                </a>
+                {{-- 
 
                 <a href="#" class="block px-4 py-3 rounded-lg hover:bg-gray-700">
 
@@ -55,7 +51,9 @@
                 <a href="{{ route('admin.users.index') }}" class="block px-4 py-3 rounded-lg hover:bg-gray-700">
                     👥 Users
                 </a>
-
+                <a href="{{route('admin.recruiters.index')}}" class="block px-4 py-3 rounded-lg hover:bg-gray-700">
+                   👔 Recruiters
+                </a>
                 <a href="{{ route('admin.skills.index') }}" class="block px-4 py-3 rounded-lg hover:bg-gray-700">
                     🛠 Skills
                 </a>

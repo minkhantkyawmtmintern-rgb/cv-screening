@@ -54,6 +54,32 @@
             </div>
         @endif
 
+        <form method="GET" class="flex gap-3 mb-5">
+
+            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search skills..."
+                class="border rounded-lg px-4 py-2 w-80">
+
+            <select name="category" class="border rounded-lg px-4 py-2">
+
+                <option value="">All Categories</option>
+
+                @foreach (['Backend', 'Frontend', 'Database', 'DevOps', 'Cloud', 'Mobile', 'AI/ML', 'Version Control'] as $category)
+                    <option value="{{ $category }}" {{ request('category') == $category ? 'selected' : '' }}>
+
+                        {{ $category }}
+
+                    </option>
+                @endforeach
+
+            </select>
+
+            <button class="bg-indigo-600 text-white px-5 rounded-lg">
+
+                Search
+
+            </button>
+
+        </form>
         <div class="bg-white rounded-2xl shadow overflow-hidden">
 
             <table class="w-full">
@@ -62,21 +88,65 @@
 
                     <tr>
 
-                        <th class="text-left px-6 py-4">
+                        <th class="px-6 py-4">
 
-                            Skill
+                            <a
+                                href="{{ route(
+                                    'admin.skills.index',
+                                    array_merge(request()->query(), [
+                                        'sort' => 'name',
+                                        'direction' => request('direction') == 'asc' ? 'desc' : 'asc',
+                                    ]),
+                                ) }}">
+
+                                Skill
+
+                                @if (request('sort') == 'name')
+                                    {{ request('direction') == 'asc' ? '↑' : '↓' }}
+                                @endif
+
+                            </a>
 
                         </th>
 
-                        <th class="text-left px-6 py-4">
+                        <th class="px-6 py-4">
 
-                            Category
+                            <a
+                                href="{{ route(
+                                    'admin.skills.index',
+                                    array_merge(request()->query(), [
+                                        'sort' => 'category',
+                                        'direction' => request('direction') == 'asc' ? 'desc' : 'asc',
+                                    ]),
+                                ) }}">
+
+                                Category
+
+                                @if (request('sort') == 'category')
+                                    {{ request('direction') == 'asc' ? '↑' : '↓' }}
+                                @endif
+
+                            </a>
 
                         </th>
+                        <th class="px-6 py-4 text-center">
 
-                        <th class="text-center px-6 py-4">
+                            <a
+                                href="{{ route(
+                                    'admin.skills.index',
+                                    array_merge(request()->query(), [
+                                        'sort' => 'job_posts_count',
+                                        'direction' => request('direction') == 'asc' ? 'desc' : 'asc',
+                                    ]),
+                                ) }}">
 
-                            Jobs Using
+                                Jobs
+
+                                @if (request('sort') == 'job_posts_count')
+                                    {{ request('direction') == 'asc' ? '↑' : '↓' }}
+                                @endif
+
+                            </a>
 
                         </th>
 
@@ -170,7 +240,11 @@
             </table>
 
         </div>
+        <div class="mt-6">
 
+            {{ $skills->links() }}
+
+        </div>
     </div>
 
 @endsection
