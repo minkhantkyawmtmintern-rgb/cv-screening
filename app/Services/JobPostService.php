@@ -7,6 +7,21 @@ use Illuminate\Support\Facades\DB;
 
 class JobPostService
 {
+    public function getRecruiterJobs()
+    {
+        return JobPost::with('skills')
+
+            ->withCount('applications')
+
+            ->withCount('highMatchedApplications')
+
+            ->withAvg('applications', 'match_score')
+
+            ->latest()
+
+            ->paginate(10);
+    }
+
     public function create(array $data): JobPost
     {
         return DB::transaction(function () use ($data) {

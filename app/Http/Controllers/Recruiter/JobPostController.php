@@ -11,16 +11,13 @@ use Illuminate\Http\Request;
 
 class JobPostController extends Controller
 {
-    public function __construct(private JobPostService $service){}
+    public function __construct(private JobPostService $service) {}
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $jobs = JobPost::with('skills')
-                ->latest()
-                ->paginate(10);
-
+        $jobs = $this->service->getRecruiterJobs();
 
         return view(
             'job-posts.index',
@@ -34,7 +31,6 @@ class JobPostController extends Controller
     public function create()
     {
         $skills = Skill::all();
-
 
         return view(
             'job-posts.create',
@@ -97,7 +93,6 @@ class JobPostController extends Controller
             $jobPost,
             $request->validated()
         );
-
 
         return redirect()
             ->route('job-posts.index');

@@ -23,9 +23,54 @@
                         Active
                     </span>
                 </div>
-                <p class="text-gray-500 mt-3">
-                    {{ $job->department }}
-                </p>
+                <div class="flex justify-between mt-4 mb-3">
+                    <p class="text-gray-500 mt-3">
+                        {{ $job->department }}
+                    </p>
+                    @if ($job->applications_count > 0)
+                        <span
+                            class="inline-flex items-center rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700">
+                            🤖 AI Ready
+                        </span>
+                    @else
+                        <span
+                            class="inline-flex items-center rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600">
+                            Waiting for Applicants
+                        </span>
+                    @endif
+                </div>
+                <div class="grid grid-cols-3 gap-3 mb-5">
+                    <div class="bg-gray-50 rounded-lg p-3 text-center">
+                        <h4 class="text-blue-600 font-bold text-2xl">
+                            {{ $job->applications_count }}
+                        </h4>
+                        <small class="text-gray-500">
+                            Applicants
+                        </small>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-3 text-center">
+                        @if ($job->applications_count)
+                            <h4 class="text-green-600 font-bold text-2xl">
+                                {{ number_format($job->applications_avg_match_score, 1) }}%
+                            </h4>
+                        @else
+                            <h4 class="text-gray-400 font-bold text-2xl">
+                                --
+                            </h4>
+                        @endif
+                        <small class="text-gray-500">
+                            Avg Match
+                        </small>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-3 text-center">
+                        <h4 class="text-purple-600 font-bold text-2xl">
+                            {{ $job->high_matched_applications_count }}
+                        </h4>
+                        <small class="text-gray-500">
+                            High Match
+                        </small>
+                    </div>
+                </div>
                 <div class="mt-5">
                     <h4 class="font-semibold">
                         Required Skills
@@ -41,14 +86,15 @@
 
                 <div class="mt-6 flex justify-between">
                     <div class="flex gap-16">
-                        <a href="{{route('job-posts.show',$job)}}" class="text-blue-600 hover:underline">
+                        <a href="{{ route('job-posts.show', $job) }}" class="text-blue-600 hover:underline">
                             View Intelligence
                         </a>
-                        <a href="{{route('job-posts.edit',$job)}}" class="text-gray-600 hover:underline">
+                        <a href="{{ route('job-posts.edit', $job) }}" class="text-gray-600 hover:underline">
                             Edit
                         </a>
                     </div>
-                    <form method="POST" action="{{route('job-posts.destroy',$job)}}" onsubmit="return confirm('Delete this job profile?')">
+                    <form method="POST" action="{{ route('job-posts.destroy', $job) }}"
+                        onsubmit="return confirm('Delete this job profile?')">
                         @csrf
                         @method('DELETE')
                         <button class="text-red-600 hover:text-red-800">Delete</button>

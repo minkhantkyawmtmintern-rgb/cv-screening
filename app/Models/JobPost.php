@@ -39,4 +39,10 @@ class JobPost extends Model
     {
         return $this->hasMany(Application::class);
     }
+
+    public function highMatchedApplications()
+    {
+        return $this->hasMany(Application::class)
+            ->where('match_score', '>=', 80);
+    }
 }
