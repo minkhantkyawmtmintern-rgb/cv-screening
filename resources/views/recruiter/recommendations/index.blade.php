@@ -6,11 +6,11 @@
 
     <div class="max-w-7xl mx-auto space-y-8">
 
-        @include('recruiter.recommendations.partials._header')
+        @include('recruiter.recommendations.index-partials._header')
 
-        @include('recruiter.recommendations.partials._summary')
+        @include('recruiter.recommendations.index-partials._summary')
 
-        @include('recruiter.recommendations.partials._filters')
+        @include('recruiter.recommendations.index-partials._filters')
 
         <div class="grid grid-cols-1 xl:grid-cols-4 gap-8">
 
@@ -19,7 +19,7 @@
                 <div class="space-y-6">
 
                     @forelse($candidates as $application)
-                        @include('recruiter.recommendations.partials._candidate-card')
+                        @include('recruiter.recommendations.index-partials._candidate-card')
 
                     @empty
                         <div class="bg-white rounded-xl shadow p-10 text-center">
@@ -34,7 +34,7 @@
 
             <div>
 
-                @include('recruiter.recommendations.partials._sidebar')
+                @include('recruiter.recommendations.index-partials._sidebar')
 
             </div>
 
