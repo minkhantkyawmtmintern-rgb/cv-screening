@@ -10,15 +10,10 @@ class JobPostService
     public function getRecruiterJobs()
     {
         return JobPost::with('skills')
-
             ->withCount('applications')
-
             ->withCount('highMatchedApplications')
-
             ->withAvg('applications', 'match_score')
-
             ->latest()
-
             ->paginate(10);
     }
 
@@ -49,6 +44,35 @@ class JobPostService
             }
             return $jobPost;
         });
+    }
+
+    public function getJobDetail(JobPost $jobPost): array
+    {
+        $jobPost->load([
+            'skills',
+            'applications.candidate',
+        ]);
+
+        $jobPost->loadCount([
+            'applications',
+            'highMatchedApplications',
+        ]);
+
+        $jobPost->loadAvg(
+            'applications',
+            'match_score'
+        );
+
+        $topCandidate = $jobPost
+            ->applications()
+            ->with('candidate')
+            ->orderByDesc('match_score')
+            ->first();
+
+        return [
+            'jobPost' => $jobPost,
+            'topCandidate' => $topCandidate,
+        ];
     }
 
     public function update(

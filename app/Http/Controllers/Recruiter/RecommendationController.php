@@ -13,9 +13,9 @@ class RecommendationController extends Controller
     public function __construct(private RecommendationService $service)
     { }
 
-    public function index(JobPost $jobPost)
+    public function index(Request $request,JobPost $jobPost)
     {
-        $candidates = $this->service->getRecommendedCandidates($jobPost->id);
+        $candidates = $this->service->getRecommendedCandidates($jobPost->id, $request);
         return view(
             'recruiter.recommendations.index',
             compact('jobPost','candidates')

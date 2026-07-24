@@ -60,12 +60,9 @@ class JobPostController extends Controller
      */
     public function show(JobPost $jobPost)
     {
-        $jobPost->load('skills');
+        $data = $this->service->getJobDetail($jobPost);
 
-        return view(
-            'job-posts.show',
-            compact('jobPost')
-        );
+        return view('job-posts.show', $data );
     }
 
     /**
